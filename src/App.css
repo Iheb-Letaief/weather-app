@@ -166,8 +166,8 @@ body {
 }
 
 .time-container {
-  background-color: #f8f9fa;
-  color: #0c0679;
+  background-color: hsl(240, 48%, 45%);
+  color: #f8f9fa;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

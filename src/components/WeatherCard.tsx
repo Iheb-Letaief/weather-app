@@ -41,7 +41,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       <div className="chance-of-rain-section">
         <h3>Chance of Rain</h3>
         <div className="loading-bar-container">
-          <div className="time"></div>
+          <div className="time">12:00</div>
           <div className="loading-bar">
             <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
           </div>
@@ -49,7 +49,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         </div>
 
         <div className="loading-bar-container">
-          <div className="time"></div>
+          <div className="time">13:00</div>
           <div className="loading-bar">
             <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
           </div>
@@ -57,7 +57,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         </div>
 
         <div className="loading-bar-container">
-          <div className="time"></div>
+          <div className="time">14:00</div>
           <div className="loading-bar">
             <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
           </div>
@@ -65,7 +65,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         </div>
 
         <div className="loading-bar-container">
-          <div className="time"></div>
+          <div className="time">15:00</div>
           <div className="loading-bar">
             <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
           </div>
