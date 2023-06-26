@@ -5,6 +5,7 @@ import WeatherCard from "./components/WeatherCard";
 import WeatherDashboard from "./components/WeatherDashboard";
 import { useEffect, useState } from "react";
 import useWeatherAPI from "./hooks/useWeatherAPI";
+import { WeatherProvider } from "./context/WeatherContext";
 
 
 function App() {
@@ -25,17 +26,20 @@ function App() {
   return (
     <div className="weather-dashboard">
       <Sidebar />
-      <WeatherDashboard />
-      <WeatherCard
-        cityName={"Sousse"}
-        country={"Tunisia"}
-        time={currentTime.toString()}
-        weatherInfo={weatherData.weatherInfo}
-        temperature={weatherData.temperature}
-        chanceOfRain={weatherData.chanceOfRain}
-        sunriseTime={"5:00"}
-        sunsetTime={"20:00"}
-      />
+      <WeatherProvider>
+        <WeatherDashboard />
+        <WeatherCard
+          cityName={"Sousse"}
+          country={"Tunisia"}
+          time={currentTime.toString()}
+          weatherInfo={weatherData.weatherInfo}
+          temperature={weatherData.temperature}
+          chanceOfRain={weatherData.chanceOfRain}
+          sunriseTime={"5:00"}
+          sunsetTime={"20:00"}
+        />
+      </WeatherProvider>
+      
     </div>
   );
 }

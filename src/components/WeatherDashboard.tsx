@@ -92,7 +92,7 @@ const WeatherDashboard = () => {
             <FontAwesomeIcon className="mini-card-icon" icon={faCloudRain} />
             <div className="mini-card-info">
               <p>Rain chance</p>
-              <h2>{weatherData.chanceOfRain[0]}%</h2>
+              <h2>{weatherData.chanceOfRain}%</h2>
             </div>
             
           </div>

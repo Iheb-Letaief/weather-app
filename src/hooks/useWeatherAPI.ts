@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import getWeatherDescription from '../utils/weatherDescription';
+import forecast from './forecast.json'
 
-interface Weather {
-  time: number;
+
+export interface Weather {
+  time: String;
   weatherInfo: String;
   temperature: number;
-  chanceOfRain: number[];
+  chanceOfRain: number;
   windSpeed: number;
   pressure: number;
   uvIndex: number;
@@ -14,6 +16,7 @@ interface Weather {
 const url =
   'https://api.open-meteo.com/v1/forecast?latitude=35.83&longitude=10.64&hourly=temperature_2m,precipitation_probability,surface_pressure,windspeed_180m,uv_index,weathercode';
 
+
 function useWeatherAPI() {
   const [data, setData] = useState<Weather>({} as Weather);
 
@@ -21,6 +24,7 @@ function useWeatherAPI() {
       try {
         const apiResponse = await fetch(url);
         const json = await apiResponse.json();
+        //const json = forecast
         console.log(json)
 
         const currentDate = new Date();
@@ -37,17 +41,15 @@ function useWeatherAPI() {
         } = json.hourly;
 
         const currentIndex = currentHour < time.length ? currentHour : time.length - 1;
-        const next5HoursChanceOfRain = precipitation_probability.slice(currentIndex, currentIndex + 5);
-
-
-        console.log(currentIndex)
+        //const next5HoursChanceOfRain = precipitation_probability.slice(currentIndex, currentIndex + 5);
 
 
         setData({
           time: time[currentIndex],
           weatherInfo: getWeatherDescription(weathercode[currentIndex]),
           temperature: temperature_2m[currentIndex],
-          chanceOfRain: next5HoursChanceOfRain,
+          //chancOfRain: next5HoursChanceOfRain,
+          chanceOfRain: precipitation_probability[currentIndex],
           windSpeed: windspeed_180m[currentIndex],
           pressure: surface_pressure[currentIndex],
           uvIndex: uv_index[currentIndex]
