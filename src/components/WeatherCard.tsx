@@ -1,5 +1,6 @@
 import React from "react";
 import { formatDate } from "../utils/formatDate";
+import useWeatherAPI from "../hooks/useWeatherAPI";
 
 
 interface WeatherCardProps {
@@ -24,6 +25,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   sunsetTime,
 }) => {
   const formattedTime = formatDate(new Date(time), "MMM dd, yyyy h:mm:ss a");
+
+  const weatherData = useWeatherAPI();
+
 
 
   return (

@@ -59,6 +59,7 @@ const WeatherDashboard = () => {
     return <div>Loading...</div>
   }
 
+
   return (
     <div className="weather">
       <div className="dashboard-header">
@@ -83,7 +84,7 @@ const WeatherDashboard = () => {
             <FontAwesomeIcon className="mini-card-icon" icon={faWind}  />
             <div className="mini-card-info">
               <p>Wind speed</p>
-              <h2>12 km/h</h2>
+              <h2>{weatherData.windSpeed} km/h</h2>
             </div>
             
           </div>
@@ -91,7 +92,7 @@ const WeatherDashboard = () => {
             <FontAwesomeIcon className="mini-card-icon" icon={faCloudRain} />
             <div className="mini-card-info">
               <p>Rain chance</p>
-              <h2>20%</h2>
+              <h2>{weatherData.chanceOfRain}%</h2>
             </div>
             
           </div>
@@ -102,7 +103,7 @@ const WeatherDashboard = () => {
             <FontAwesomeIcon className="mini-card-icon" icon={faBarsStaggered} />
             <div className="mini-card-info">
               <p>Pressure</p>
-              <h2>720 hpa</h2>
+              <h2>{weatherData.pressure} hpa</h2>
             </div>
             
           </div>
@@ -110,7 +111,7 @@ const WeatherDashboard = () => {
            <FontAwesomeIcon className="mini-card-icon" icon={faSun} />
            <div className="mini-card-info">
               <p>UV index</p>
-              <h2>2.3</h2>
+              <h2>{weatherData.uvIndex}</h2>
            </div>
             
           </div>
