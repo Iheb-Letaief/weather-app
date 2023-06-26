@@ -4,9 +4,12 @@ import Sidebar from "./components/Sidebar";
 import WeatherCard from "./components/WeatherCard";
 import WeatherDashboard from "./components/WeatherDashboard";
 import { useEffect, useState } from "react";
+import useWeatherAPI from "./hooks/useWeatherAPI";
+
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const weatherData = useWeatherAPI();
 
   // Update the current time every second
   useEffect(() => {
@@ -27,9 +30,9 @@ function App() {
         cityName={"Sousse"}
         country={"Tunisia"}
         time={currentTime.toString()}
-        weatherInfo={"Sunny"}
-        temperature={30}
-        chanceOfRain={80}
+        weatherInfo={weatherData.weatherInfo}
+        temperature={weatherData.temperature}
+        chanceOfRain={weatherData.chanceOfRain}
         sunriseTime={"5:00"}
         sunsetTime={"20:00"}
       />

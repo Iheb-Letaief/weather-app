@@ -7,9 +7,9 @@ interface WeatherCardProps {
   cityName: string;
   country: string;
   time: string;
-  weatherInfo: string;
+  weatherInfo: String;
   temperature: number;
-  chanceOfRain: number;
+  chanceOfRain: number[];
   sunriseTime: string;
   sunsetTime: string;
 }
@@ -26,7 +26,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 }) => {
   const formattedTime = formatDate(new Date(time), "MMM dd, yyyy h:mm:ss a");
 
-  const weatherData = useWeatherAPI();
 
 
 
@@ -47,33 +46,33 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         <div className="loading-bar-container">
           <div className="time"></div>
           <div className="loading-bar">
-            <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
+            <div className="progress" style={{ width: `${chanceOfRain[0]}%` }}></div>
           </div>
-          <div className="percentage">{chanceOfRain}</div>
+          <div className="percentage">{chanceOfRain[0]}</div>
         </div>
 
         <div className="loading-bar-container">
           <div className="time"></div>
           <div className="loading-bar">
-            <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
+            <div className="progress" style={{ width: `${chanceOfRain[1]}%` }}></div>
           </div>
-          <div className="percentage">{chanceOfRain}</div>
+          <div className="percentage">{chanceOfRain[1]}</div>
         </div>
 
         <div className="loading-bar-container">
           <div className="time"></div>
           <div className="loading-bar">
-            <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
+            <div className="progress" style={{ width: `${chanceOfRain[2]}%` }}></div>
           </div>
-          <div className="percentage">{chanceOfRain}</div>
+          <div className="percentage">{chanceOfRain[2]}</div>
         </div>
 
         <div className="loading-bar-container">
           <div className="time"></div>
           <div className="loading-bar">
-            <div className="progress" style={{ width: `${chanceOfRain}%` }}></div>
+            <div className="progress" style={{ width: `${chanceOfRain[3]}%` }}></div>
           </div>
-          <div className="percentage">{chanceOfRain}</div>
+          <div className="percentage">{chanceOfRain[3]}</div>
         </div>
 
         
