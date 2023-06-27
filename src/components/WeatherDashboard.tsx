@@ -6,6 +6,7 @@ import useWeatherAPI from "../hooks/useWeatherAPI";
 
 
 
+
 const DateComponent = () => {
   const currentDate = new Date().toLocaleDateString();
 
@@ -53,7 +54,7 @@ const ProfileButton = () => {
 
 const WeatherDashboard = () => {
   const weatherData = useWeatherAPI();
-
+  
 
   if(!weatherData){
     return <div>Loading...</div>
@@ -119,8 +120,11 @@ const WeatherDashboard = () => {
       </div>
 
       <div className="weekly-temperature">
-        <h2>Average Weekly Temperature</h2>
-        <ForecastChart />
+        <h2>Temperature throughout the day</h2>
+        <div style={{ width: "100%", height: "250px" }}>
+          <ForecastChart temperature={weatherData.chartTemp} hours={weatherData.chartTime}/>
+        </div>
+        
       </div>
     </div>
   );

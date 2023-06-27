@@ -1,44 +1,64 @@
-import React from "react";
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  LineSeries,
-  MarkSeries,
-  LineMarkSeries,
-} from "react-vis";
+import React, { useEffect, useRef } from 'react';
+import Chart, { ChartConfiguration, ChartData, LineController, LinearScale, PointElement } from 'chart.js/auto';
+import useWeatherAPI, { Weather } from '../hooks/useWeatherAPI';
 
-const ForecastChart = () => {
-  const data = [
-    { x: 1, y: 25 },
-    { x: 2, y: 30 },
-    { x: 3, y: 28 },
-    { x: 4, y: 32 },
-    { x: 5, y: 29 },
-    { x: 6, y: 31 },
-    { x: 7, y: 27 },
-  ];
+interface ForecastChartProps {
+  temperature: number[];
+  hours: string[];
+}
 
-  return (
-    <div className="forecast-chart">
-      <div className="chart-container">
-        <XYPlot width={630} height={250}>
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis title="Day" />
-          <YAxis title="Temperature" />
-          <LineMarkSeries
-            data={data}
-            lineStyle={{ stroke: "black" }}
-            markStyle={{ stroke: "black", fill: "white" }}
-            color="blue"
-            />
-        </XYPlot>
-      </div>
-    </div>
-  );
+const ForecastChart: React.FC<ForecastChartProps> = ({ temperature, hours }) => {
+  const chartRef = useRef<HTMLCanvasElement | null>(null);
+  const chartInstance = useRef<Chart | null>(null);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      const ctx = chartRef.current.getContext('2d');
+
+      if (ctx) {
+        const chartData: ChartData<'line'> = {
+          labels: hours,
+          datasets: [
+            {
+              label: 'Temperature',
+              data: temperature,
+              borderColor: 'blue',
+              fill: false,
+              borderCapStyle: 'round'
+            },
+          ],
+        };
+
+        const chartConfig: ChartConfiguration<'line'> = {
+          type: 'line',
+          data: chartData,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+
+        };
+
+        Chart.register(LineController, LinearScale, PointElement);
+
+        chartInstance.current = new Chart(ctx, chartConfig) as Chart;
+      }
+    }
+
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+        chartInstance.current = null;
+      }
+    };
+  }, [temperature, hours]);
+
+  return <canvas ref={chartRef} />;
 };
 
 export default ForecastChart;
