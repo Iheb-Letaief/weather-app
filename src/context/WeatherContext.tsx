@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
+import { useQuery, QueryClient, QueryClientProvider } from 'react-query';
 
 interface WeatherData {
   weatherInfo: string;
@@ -17,25 +18,22 @@ interface WeatherProviderProps {
 }
 
 export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const queryClient = new QueryClient(); 
 
-  useEffect(() => {
-    const cachedWeatherData = localStorage.getItem("weatherData");
-    if (cachedWeatherData) {
-      setWeatherData(JSON.parse(cachedWeatherData));
-    }
-  }, []);
+  const { data } = useQuery('weatherData', () => JSON.parse(localStorage.getItem('weatherData') || 'null'));
 
-  useEffect(() => {
-    if (weatherData) {
-      localStorage.setItem("weatherData", JSON.stringify(weatherData));
-    }
-  }, [weatherData]);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(data);
+
+  if (data && !weatherData) {
+    setWeatherData(data);
+  }
 
   return (
-    <WeatherContext.Provider value={{ weatherData }}>
-      {children}
-    </WeatherContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <WeatherContext.Provider value={{ weatherData }}>
+        {children}
+      </WeatherContext.Provider>
+    </QueryClientProvider>
   );
 };
 
